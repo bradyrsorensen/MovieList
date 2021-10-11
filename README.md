@@ -18,9 +18,40 @@ String[] tokens = movieInfo.split("\\|");
 // checks input file for 1 and 0 and sets boolean array elements to true if 1
 // and false if 0
 for (int i = 5; i < tokens.length; i++) {
-		if (Integer.parseInt(tokens[i]) == 1) {
-			genre[j] = true;
-		}
-		j++;
+	if (Integer.parseInt(tokens[i]) == 1) {
+		genre[j] = true;
+	}
+	j++;
 }
 ```
+Given this format it is quite easy to add more movies to the text file as long as it follows the format. Additionally it would also be easy to add a method which will add user input movies to a serializable file and format the data automatically.
+
+Let's continue to look at methods which deal with the genres of movies, here we see an example of code which takes an input genre from the user and checks through the movie list to select movies that match that genre and then adds those to a queue.
+```java
+// checks that the type passed is a valid genre
+	for (int i = 0; i < movie.getGenreList().length; i++) {
+		// checks for a valid type, if found exits the loop
+		if (movie.getGenreList()[i].equalsIgnoreCase(type)) {
+			break;
+		}
+		// checks to see if all elements of the array have been checked
+		if (i == movie.getGenreList().length - 1) {
+			// if no element matches the type passed it is not a valid type
+			System.out.println("not a valid type");
+		}
+	}
+	// Adds movies to the typeQueue that match the type that was passed
+	for (int j = 0; j < this.size(); j++) {
+		for (int i = 0; i < movie.getGenre().length; i++) {
+			// checks what genre the movie is
+			if (movie.getGenre()[i] == true) {
+				compareString = movie.getGenreList()[i];
+				// checks to see if that genre matches the one passed, if it does, adds it to
+				// queue
+				if (compareString.equalsIgnoreCase(type)) {
+					typeQueue.add(movie);
+				}
+			}
+		}
+```
+
